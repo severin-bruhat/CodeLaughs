@@ -10,10 +10,10 @@ import os
 load_dotenv('.env')
 
 # Access Twitter API credentials
-consumer_key = os.environ.get('TWITTER_API_KEY')
-consumer_secret = os.environ.get('TWITTER_API_SECRET')
-access_token = os.environ.get('TWITTER_ACCESS_TOKEN')
-access_token_secret = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
+twitter_consumer_key = os.environ.get('TWITTER_API_KEY')
+twitter_consumer_secret = os.environ.get('TWITTER_API_SECRET')
+twitter_access_token = os.environ.get('TWITTER_ACCESS_TOKEN')
+twitter_access_token_secret = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
 
 
 # Initialise Firebase
@@ -22,10 +22,10 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # Authenticate with Twitter API
-client = tweepy.Client(consumer_key,
-                       consumer_secret,
-                       access_token,
-                       access_token_secret)
+client = tweepy.Client(consumer_key=twitter_consumer_key,
+                       consumer_secret=twitter_consumer_secret,
+                       access_token=twitter_access_token,
+                       access_token_secret=twitter_access_token_secret)
 
 # Function to get a random comment with null flag from Firestore
 
