@@ -15,7 +15,6 @@ twitter_consumer_secret = os.environ.get('TWITTER_API_SECRET')
 twitter_access_token = os.environ.get('TWITTER_ACCESS_TOKEN')
 twitter_access_token_secret = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
 
-
 # Initialise Firebase
 cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
@@ -26,6 +25,26 @@ client = tweepy.Client(consumer_key=twitter_consumer_key,
                        consumer_secret=twitter_consumer_secret,
                        access_token=twitter_access_token,
                        access_token_secret=twitter_access_token_secret)
+
+# array of hashtags
+hashtags = [
+    "#CodeLaughs",
+    "#ProgrammingHumor",
+    "#DevLife",
+    "#TechHumor",
+    "#CodeJokes",
+    "#ProgrammerHumor",
+    "#TechJokes",
+    "#GeekHumor",
+    "#NerdyLaughs",
+    "#LaughAtCodeComment",
+    "#TechLaughs",
+    "#CodingComedy",
+    "#LaughWhileCoding",
+    "#CodeFunny",
+    "#ProgrammerLaughs",
+    "#TechFunnies"
+]
 
 # Function to get a random comment with null flag from Firestore
 
@@ -44,7 +63,8 @@ def post_comment(comment):
     tweet = comment["content"]["text"]
     tweet_id = comment["id"]
     try:
-        client.create_tweet(text=tweet + " #CodeLaughs #ProgrammerHumor")
+        random_hashtag = random.choice(hashtags)
+        client.create_tweet(text=tweet + " " + random_hashtag)
         print("Comment posted on Twitter:", tweet)
     except tweepy.TweepError as e:
         print("Error occurred while posting the comment:", e)
@@ -64,7 +84,6 @@ def post_comment(comment):
 
 # Get a random comment and post it on Twitter
 random_comment = get_random_comment()
-
 if random_comment:
     if not post_comment(random_comment):
         print("Failed to post the comment and update the flag.")
