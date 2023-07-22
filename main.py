@@ -5,6 +5,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from dotenv import load_dotenv
 import os
+import requests
 
 # Load environment variables from the .env file
 load_dotenv('.env')
@@ -56,8 +57,39 @@ def get_random_comment():
         return {"id": doc.id, "content": doc.to_dict()}
     return None
 
-# Function to post a comment on Twitter and update the flag in Firestore
+# Function that generate an image with Carbon
 
+
+def generate_image(text):
+    api_url = "https://carbonara.solopov.dev/api/cook"
+
+    headers = {
+        'Content-Type': 'multipart/form-data',
+    }
+
+    parameters = {
+        "code": text,
+        "widthAdjustment": "false",
+    }
+
+    response = requests.post(api_url, files=parameters)
+
+    if response.status_code == 200:
+        try:
+            image_path = 'tweet_image.png'
+            with open(image_path, 'wb') as f:
+                print(response.status_code)
+                f.write(response.content)
+            print("Image generated.")
+            return image_path
+        except Exception as e:
+            print("Error occurred while generating the image:", e)
+            return False
+
+    return False
+
+
+# Function to post a comment on Twitter and update the flag in Firestore
 
 def post_comment(comment):
     tweet = comment["content"]["text"]
@@ -87,5 +119,5 @@ random_comment = get_random_comment()
 if random_comment:
     if not post_comment(random_comment):
         print("Failed to post the comment and update the flag.")
-else:
-    print("No comments with null or false flag found in Firestore.")
+    else:
+        print("No comments with null or false flag found in Firestore.")

@@ -33,7 +33,7 @@ You will nee to create a `serviceAccountKey.json` file.
 
 To obtain the serviceAccountKey.json file for Firebase, follow these steps:
 
-- Go to the Firebase Console (https://console.firebase.google.com/) and open your project.
+- Go to the [Firebase Console](https://console.firebase.google.com/) and open your project.
 
 - Click on the gear icon next to "Project Overview" and select "Project settings".
 
@@ -49,14 +49,19 @@ Tweepy is the library we use to interact with the Twitter API.
 
 `pip3 install tweepy`
 
-Official documentation: https://docs.tweepy.org/en/stable/client.html
+See the [official documentation](https://docs.tweepy.org/en/stable/client.html)
+
+## Carbonara
+
+[Carbonara](https://github.com/petersolopov/carbonara) provides an API for [Carbon](https://carbon.now.sh/).
+We use it to generate an image to attach to the Tweet.
 
 # Usage
 
 ## Load the messages into Firestore
 
 Edit `load.py` and add your messages into the `comments` array.
-The run `python3 load.py`
+The run `python3 load.py`.
 
 ## Post a message
 
