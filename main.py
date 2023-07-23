@@ -53,7 +53,13 @@ hashtags = [
     "#LaughWhileCoding",
     "#CodeFunny",
     "#ProgrammerLaughs",
-    "#TechFunnies"
+    "#TechFunnies",
+    "#NerdJokes",
+    "#TechHumor",
+    "#coding",
+    "#programmingjoke",
+    "#DeveloperLaughs",
+    "#TechHumour",
 ]
 
 # Function to get a random comment with null flag from Firestore
