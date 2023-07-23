@@ -67,7 +67,7 @@ hashtags = [
 
 def get_random_comment():
     comments_ref = db.collection("comments")
-    query = comments_ref.where("flag", "==", None).limit(1).stream()
+    query = comments_ref.where("posted", "==", None).limit(1).stream()
     for doc in query:
         return {"id": doc.id, "content": doc.to_dict()}
     return None
@@ -111,7 +111,7 @@ def upload_image_to_twitter(image_path, alt_text):
 
     return media_id
 
-# Function to post a comment on Twitter and update the flag in Firestore
+# Function to post a comment on Twitter and update the flag (posted) in Firestore
 
 
 def post_comment(comment):
@@ -133,7 +133,7 @@ def post_comment(comment):
         try:
             # Update the flag to true in Firestore
             comment_ref = db.collection("comments").document(tweet_id)
-            comment_ref.update({"flag": True})
+            comment_ref.update({"posted": True})
             # print("Flag updated to True in Firestore.")
         except Exception as e:
             print("Error occurred while updating the flag in Firestore:", e)
