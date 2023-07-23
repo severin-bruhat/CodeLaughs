@@ -117,13 +117,13 @@ def upload_image_to_twitter(image_path, alt_text):
 def post_comment(comment):
     tweet = comment["content"]["text"]
     tweet_id = comment["id"]
-    image_path = generate_image(tweet)
+    image_path = generate_image("/* " + tweet + " */")
 
     if image_path != False:
         try:
             media_id = upload_image_to_twitter(image_path, tweet)
             random_hashtag = random.choice(hashtags)
-            client.create_tweet(text=tweet + " " +
+            client.create_tweet(text="/* " + tweet + " */ " +
                                 random_hashtag, media_ids=[media_id])
             # print("Comment posted on Twitter:", tweet)
         except tweepy.TweepError as e:
