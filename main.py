@@ -117,30 +117,28 @@ def upload_image_to_twitter(image_path, alt_text):
 def post_comment(comment):
     tweet = comment["content"]["text"]
     tweet_id = comment["id"]
-    image_path = generate_image("/* " + tweet + " */")
+    # image_path = generate_image("/* " + tweet + " */")
 
-    if image_path != False:
-        try:
-            media_id = upload_image_to_twitter(image_path, tweet)
-            random_hashtag = random.choice(hashtags)
-            client.create_tweet(text="/* " + tweet + " */ " +
-                                random_hashtag, media_ids=[media_id])
-            # print("Comment posted on Twitter:", tweet)
-        except tweepy.TweepError as e:
-            print("Error occurred while posting the comment:", e)
-            return False
+    # if image_path != False:
+    try:
+        # media_id = upload_image_to_twitter(image_path, tweet)
+        random_hashtag = random.choice(hashtags)
+        client.create_tweet(text="/* " + tweet + " */ " +
+                            random_hashtag)
+        # print("Comment posted on Twitter:", tweet)
+    except tweepy.TweepError as e:
+        print("Error occurred while posting the comment:", e)
+        return False
 
-        try:
-            # Update the flag to true in Firestore
-            comment_ref = db.collection("comments").document(tweet_id)
-            comment_ref.update({"posted": True})
-            # print("Flag updated to True in Firestore.")
-        except Exception as e:
-            print("Error occurred while updating the flag in Firestore:", e)
-            return False
-        return True
-
-    return False
+    try:
+        # Update the flag to true in Firestore
+        comment_ref = db.collection("comments").document(tweet_id)
+        comment_ref.update({"posted": True})
+        # print("Flag updated to True in Firestore.")
+    except Exception as e:
+        print("Error occurred while updating the flag in Firestore:", e)
+        return False
+    return True
 
 
 # Get a random comment and post it on Twitter
