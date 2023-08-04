@@ -36,7 +36,6 @@ auth = tweepy.OAuth1UserHandler(
 )
 api = tweepy.API(auth)
 
-# array of hashtags
 hashtags = [
     "#CodeLaughs",
     "#ProgrammingHumor",
@@ -62,6 +61,21 @@ hashtags = [
     "#TechHumour",
 ]
 
+colours = [
+    "#4e87ad",
+    "#1F816D",
+    "#ebc354",
+    "#eb96da",
+    "#a8d180",
+    "#517cfc",
+    "#725ae8",
+    "#3611ed",
+    "#db27ab",
+    "#f2e88d",
+    "#e86946",
+    "#42c9db",
+]
+
 # Function to get a random comment with null flag from Firestore
 
 
@@ -84,6 +98,7 @@ def generate_image(text):
 
     parameters = {
         "code": text,
+        "backgroundColor": random.choice(colours),
         "widthAdjustment": "false",
     }
 
