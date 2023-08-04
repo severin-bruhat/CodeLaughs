@@ -1,8 +1,0 @@
-pipelines:
-  custom:
-    prod:
-      - step:
-          deployment: production
-          name: deploy
-          script:
-            - rsync -azv --checksum --exclude-from=deployment-exclude-list.txt -e 'ssh -p 1212' $BITBUCKET_CLONE_DIR/ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
