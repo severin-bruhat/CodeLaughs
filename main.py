@@ -100,6 +100,7 @@ def generate_image(text):
         "code": text,
         "backgroundColor": random.choice(colours),
         "widthAdjustment": "false",
+        "theme": "blackboard",
     }
 
     response = requests.post(api_url, files=parameters)
