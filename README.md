@@ -15,11 +15,28 @@ Once sent, `posted` is set to True so we don't re-send it.
 
 # Dependencies
 
+## Virtual environment
+
+Create the environment:
+
+```
+mkdir ~/.venv
+python3 -m venv ~/.venv
+```
+
+Activate the environment:
+
+```
+source ~/.venv/bin/activate
+```
+
+
+
 ## Dotenv
 
 Python-dotenv reads key-value pairs from a .env file and can set them as environment variables.
 
-`pip3 install python-dotenv`
+`python3 -m pip install python-dotenv`
 
 Copy the `.env.dist` file and rename it `.env` use it to store your Twitter auth details.
 
@@ -27,7 +44,7 @@ Copy the `.env.dist` file and rename it `.env` use it to store your Twitter auth
 
 We use Firestore to store the comments as documents.
 
-`pip3 install firebase_admin`
+`python3 -m pip install firebase_admin`
 
 You will nee to create a `serviceAccountKey.json` file.
 
